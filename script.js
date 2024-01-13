@@ -3,21 +3,32 @@ const meals = document.querySelector("#meals");
 
 // to get foods image and name from objects.js file
 function foods(data) {
-  if (!data) return;
-  console.log(data);
-  for (let newfood of data) {
-    const containeruppers = document.createElement("div");
-    containeruppers.classList.add("img-contaiener");
-    containeruppers.innerHTML = `
-    <img
-      class="container-img"
-      src="${newfood.img}"
-      alt=""
-    />
-    <span>${newfood.name}</span>
-    `;
-    containerupper.appendChild(containeruppers);
+  if (data.length) {
+    for (let newfood of data) {
+      const containeruppers = document.createElement("div");
+      containeruppers.classList.add("img-contaiener");
+      containeruppers.innerHTML = `
+      <img
+        class="container-img"
+        src="${newfood.img}"
+        alt=""
+      />
+      <span>${newfood.name}</span>
+      <span class='removeButton'>X</span>
+      `;
+      containerupper.appendChild(containeruppers);
+      const containeruppersTarget = document.querySelector(".img-contaiener");
+      const removeButton = document.querySelector(".removeButton");
+      removeButton.addEventListener("click", () => {
+        containeruppersTarget.remove();
+        const btn = document.querySelector("#btn");
+        btn.classList.remove("active");
+      });
+      return;
+    }
   }
+  const containeruppers = document.querySelector(".img-contaiener");
+  containeruppers.remove();
 }
 
 getRandomMeal();
@@ -27,27 +38,10 @@ async function getRandomMeal() {
 
   const respData = await resp.json();
   const randomMeal = respData.meals[0];
-  //console.log(randomMeal);
   addMeal(randomMeal, true);
 }
 
-// async function getMealById(id) {
-//   const resp = await fetch(
-//     "www.themealdb.com/api/json/v1/1/lookup.php?i=" + id
-//   );
-
-//   const respData = await resp.json();
-//   const meal = respData.meals[0];
-
-//   return meal;
-// }
-
-// async function getMealBySearch(term) {
-//   const meals = await fetch(
-//     "www.themealdb.com/api/json/v1/1/search.php?s=" + term
-//   );
-// }
-let items = [];
+var items = [];
 function addMeal(mealData, random = false) {
   const meal = document.createElement("div");
   meal.classList.add("section-lower-img-container");
@@ -79,77 +73,14 @@ function addMeal(mealData, random = false) {
   const btn = document.querySelector("#btn");
 
   btn.addEventListener("click", function (e) {
-    btn.classList.toggle("active");
-
-    //console.log(items.length);
-
-    console.log(items.length);
-    if (!items.length) {
-      items.push({ name: mealData.strMeal, img: mealData.strMealThumb });
+    btn.classList.add("active");
+    if (items.length) {
+      items = [];
+      btn.classList.remove("active");
       foods(items);
-      return;
     } else {
-      items.push([]);
-      foods();
+      items.push({ name: "Food", img: mealData.strMealThumb });
+      foods(items);
     }
-
-    // console.log(items.length);
-    // if (btn.classList.contains("active")) {
-    //   removeMealLS(mealData.idMeal);
-    //   btn.classList.remove("active");
-    // } else {
-    //   addMealsLs(mealData.idMeal);
-    //   btn.classList.add("active");
-    // }
   });
-}
-
-// function addMealsLs(mealId) {
-//   const mealIds = getmealsLS();
-//   localStorage.setItem("mealIds", JSON.stringify([...mealIds, mealId]));
-// }
-
-// function removeMealLS(mealId) {
-//   const mealIds = getmealsLS();
-
-//   localStorage.setItem(
-//     "mealIds",
-//     JSON.stringify(mealIds.filter((id) => id !== mealId))
-//   );
-// }
-
-// function getmealsLS() {
-//   const mealIds = JSON.parse(localStorage.getItem("mealIds"));
-
-//   return mealIds === null ? [] : mealIds;
-// }
-
-// async function fetchFavMeals() {
-//   const mealIds = getmealsLS();
-
-//   for (let i = 0; i < mealIds.length; i++) {
-//     const mealId = mealIds[i];
-//     const meal = await getMealById(mealId);
-
-//     addMealFav(meal);
-//   }
-// }
-
-// function addMealFav(mealData) {
-//   const containeruppers = document.createElement("div");
-//   containeruppers.classList.add("img-contaiener");
-//   containeruppers.innerHTML = `
-//         <img
-//           class="container-img"
-//           src="${mealData.strMealThumb}"
-//           alt=""
-//         />
-//         <span>${mealData.strMeal}</span>
-//         `;
-
-//   containerupper.append(containeruppers);
-// }
-
-function removeItem() {
-  foods();
 }
