@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&family=Roboto:wght@100;300;400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.mobile-container {
+  overflow: hidden;
+  height: 38rem;
+  width: 24rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  background-color: #fff;
+  padding: 20px;
+}
+.mobile-container {
+  border-radius: 6px;
+}
+input[type="checkbox"] {
+  display: none;
+}
+input[type="search"] {
+  display: none;
+}
+.search-btn {
+  height: 1.4rem;
+}
+.section-upper {
+  display: flex;
+  flex-direction: column;
+}
+.container-upper {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  white-space: nowrap;
+  justify-content: space-around;
+  align-items: start;
+  background-color: #f4e1ff;
+  padding: 5px 10px;
+  gap: 1rem;
+}
+.img-contaiener {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.img-contaiener span {
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+.container-img {
+  border-radius: 50%;
+  height: 4.5rem;
+  width: 4.5rem;
+}
+.section-lower {
+  margin-top: 1rem;
+}
+.section-lower-img-container {
+  padding: 1rem 2rem;
+  overflow: hidden;
+}
+.container-section-lower-img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.section-lower-img-container span {
+  padding: 0.3rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.container-section-lower {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.custom-svg {
+  height: 1.8rem;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.active {
+  background-color: red;
+}
