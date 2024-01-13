@@ -1,25 +1,25 @@
-//import { food } from "./objects.js";
-
 const containerupper = document.querySelector("#container-upper");
 const meals = document.querySelector("#meals");
 
 // to get foods image and name from objects.js file
-// function foods() {
-//   for (let newfood of food) {
-//     const containeruppers = document.createElement("div");
-//     containeruppers.classList.add("img-contaiener");
-//     containeruppers.innerHTML = `
-//     <img
-//       class="container-img"
-//       src="${newfood.img}"
-//       alt=""
-//     />
-//     <span>${newfood.name}</span>
-//     `;
-//     containerupper.appendChild(containeruppers);
-//   }
-// }
-// foods();
+function foods(data) {
+  if (!data) return;
+  console.log(data);
+  for (let newfood of data) {
+    const containeruppers = document.createElement("div");
+    containeruppers.classList.add("img-contaiener");
+    containeruppers.innerHTML = `
+    <img
+      class="container-img"
+      src="${newfood.img}"
+      alt=""
+    />
+    <span>${newfood.name}</span>
+    `;
+    containerupper.appendChild(containeruppers);
+  }
+}
+
 getRandomMeal();
 
 async function getRandomMeal() {
@@ -27,7 +27,7 @@ async function getRandomMeal() {
 
   const respData = await resp.json();
   const randomMeal = respData.meals[0];
-  console.log(randomMeal);
+  //console.log(randomMeal);
   addMeal(randomMeal, true);
 }
 
@@ -47,7 +47,7 @@ async function getRandomMeal() {
 //     "www.themealdb.com/api/json/v1/1/search.php?s=" + term
 //   );
 // }
-
+let items = [];
 function addMeal(mealData, random = false) {
   const meal = document.createElement("div");
   meal.classList.add("section-lower-img-container");
@@ -81,6 +81,19 @@ function addMeal(mealData, random = false) {
   btn.addEventListener("click", function (e) {
     btn.classList.toggle("active");
 
+    //console.log(items.length);
+
+    console.log(items.length);
+    if (!items.length) {
+      items.push({ name: mealData.strMeal, img: mealData.strMealThumb });
+      foods(items);
+      return;
+    } else {
+      items.push([]);
+      foods();
+    }
+
+    // console.log(items.length);
     // if (btn.classList.contains("active")) {
     //   removeMealLS(mealData.idMeal);
     //   btn.classList.remove("active");
@@ -136,3 +149,7 @@ function addMeal(mealData, random = false) {
 
 //   containerupper.append(containeruppers);
 // }
+
+function removeItem() {
+  foods();
+}
